@@ -1,0 +1,15 @@
+.p-description {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.select-top {
+    width: 120px;
+}
+
+.li-image-product {
+    float: left;
+    list-style: none;
+}

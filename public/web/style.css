@@ -62,13 +62,20 @@ Version: 1.0;
 }
 .cart-box-width-user {
   background: white none repeat scroll 0 0;
-    box-shadow: 0 3px 9.3px 0.7px rgba(0, 0, 0, 0.15);
-    left: auto;
-    padding: 0;
-    width: 200px;
+  box-shadow: 0 3px 9.3px 0.7px rgba(0, 0, 0, 0.15);
+  left: auto;
+  padding: 0;
+  width: 200px;
 }
 .cart-box-width-user > li {
   padding: 20px;
+}
+.imageslider{
+  width: 900px;
+  height: 430px;
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
 }
 /*Tự sửa*/
 
@@ -1192,14 +1199,15 @@ li.megamenu-img a {
   padding: 15px 0;
 }
 .single-product {
-  background: #fff none repeat scroll 0 0;
+  background: #e5e5e5 none repeat scroll 0 0;
   position: relative;
   -webkit-transition: all 0.5s ease-in-out 0s;
   transition: all 0.5s ease-in-out 0s;
   margin: 10px 0;
 }
 .single-product:hover {
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 10px rgba(198 ,213 ,218 , 20%);
+  border: 1px solid blue;
 }
 
 
@@ -1476,7 +1484,7 @@ li.megamenu-img a {
 
 .section-ttitle h2,.title-box h2 {
   color: #212121;
-  font-size: 34px;
+  font-size: 25px;
   font-weight: 900;
   line-height: 1;
   margin: 0;

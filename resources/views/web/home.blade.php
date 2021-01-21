@@ -232,8 +232,8 @@ if(Session::has('message')){
     <div class="slider-wrapper theme-default">
         <!-- Slider Background  Image Start-->
         <div id="slider" class="nivoSlider">
-            <a href="shop.html"><img src="{{asset('public/web/img\slider\1.jpg')}}" data-thumb="img/slider/1.jpg')}}" alt="" title="#htmlcaption"></a>
-            <a href="shop.html"><img src="{{asset('public/web/img\slider\2.jpg')}}" data-thumb="img/slider/2.jpg')}}" alt="" title="#htmlcaption2"></a>
+            <a href="shop.html"><img class="imageslider" src="{{asset('public/web/img\slider\3.jpg')}}" data-thumb="img/slider/1.jpg')}}" alt="" title="#htmlcaption"></a>
+            <a href="shop.html"><img class="imageslider"src="{{asset('public/web/img\slider\4.jpg')}}" data-thumb="img/slider/2.jpg')}}" alt="" title="#htmlcaption2"></a>
         </div>
         <!-- Slider Background  Image Start-->
     </div>
@@ -250,7 +250,7 @@ if(Session::has('message')){
     <div class="container">
      <!-- Product Title Start -->
      <div class="post-title pb-30">
-         <h2>hot deals</h2>
+         <h2>Sản phẩm</h2>
      </div>
      <!-- Product Title End -->
      <!-- Hot Deal Product Activation Start -->
@@ -267,7 +267,7 @@ if(Session::has('message')){
                     <?php endif ?>   
                     <?php endforeach ?>
                 </a>
-                <div class="countdown" data-countdown="2020/03/01"></div>
+                
                 <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
             </div>
             <!-- Product Image End -->
@@ -275,8 +275,7 @@ if(Session::has('message')){
             <div class="pro-content">
                 <div class="pro-info">
                     <h4><a href="{{Route('web.show',['product_id'=>$value->id])}}">{{$value->name}}</a></h4>
-                    <p><span class="price">$84.45</span><del class="prev-price">$105.50</del></p>
-                    <div class="label-product l_sale">20<span class="symbol-percent">%</span></div>
+                    <p><span class="price">{{number_format($value->price)}}VND</span></p>
                 </div>
                 <div class="pro-actions">
                     <div class="actions-primary" >
@@ -302,9 +301,9 @@ if(Session::has('message')){
 <div class="second-arrivals-product pb-45 pb-sm-5">
     <div class="container">
         <div class="main-product-tab-area">
-            <div class="tab-menu mb-25">
+            <div class="tab-menu mb-20">
                 <div class="section-ttitle">
-                    <h2>Best Seller</h2>
+                    <h2>Bán chạy nhất</h3>
                 </div>
                 <!-- Nav tabs -->
                 <ul class="nav tabs-area" role="tablist">
@@ -398,7 +397,7 @@ if(Session::has('message')){
                     <?php endif ?>   
                     <?php endforeach ?>
                 </a>
-                <div class="countdown" data-countdown="2020/03/01"></div>
+             
                 <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
             </div>
             <!-- Product Image End -->
@@ -406,8 +405,7 @@ if(Session::has('message')){
             <div class="pro-content">
                 <div class="pro-info">
                     <h4><a href="{{Route('web.show',['product_id'=>$value->id])}}">{{$value->name}}</a></h4>
-                    <p><span class="price">$84.45</span><del class="prev-price">$105.50</del></p>
-                    <div class="label-product l_sale">20<span class="symbol-percent">%</span></div>
+                    <p><span class="price">{{number_format($value->price)}}VND</span></p>
                 </div>
                 <div class="pro-actions">
                     <div class="actions-primary" >

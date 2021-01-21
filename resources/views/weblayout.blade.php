@@ -96,7 +96,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="cart-box mt-all-30">
                             <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
-                                <li><a href="{{route('web.cart')}}"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{Session::has('cart')?Session::get('cart')->totalQuantity:'Giỏ hàng trống'}}</span><span>cart</span></span></a>
+                                <li><a href="{{route('web.cart')}}"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{Session::has('cart')?Session::get('cart')->totalQuantity:0}}</span><span>cart</span></span></a>
                                     @if(Session::has('cart') == false||count(session::get('cart')->list) ==0)
                                     
                                     <ul class="ht-dropdown cart-box-width">
@@ -386,8 +386,7 @@
             <div class="row mb-60">
                <div class="col-xl-7 col-lg-7 ml-auto mr-auto col-md-8">
                 <div class="news-desc text-center mb-30">
-                   <h3>Sign Up For Newsletters</h3>
-                   <p>Be the First to Know. Sign up for newsletter today</p>
+                   <h3>Liên hệ với chúng tôi</h3>      
                </div>
                <div class="newsletter-box">
                    <form action="#">
@@ -473,8 +472,8 @@
                 <h3 class="footer-title">My Account</h3>
                 <div class="footer-content">
                     <ul class="footer-list address-content">
-                        <li><i class="lnr lnr-map-marker"></i> Address: 169-C, Technohub, Dubai Silicon Oasis.</li>
-                        <li><i class="lnr lnr-envelope"></i><a href="#"> mail Us: Support@truemart.com </a></li>
+                        <li><i class="lnr lnr-map-marker"></i> Address: 35A Ngỡ 45 Trần Thái Tông - Cầu Giấy - Hà Nội.</li>
+                        <li><i class="lnr lnr-envelope"></i><a href="#"> mail Us: nguyenvanhieu1999th1@gmail.com </a></li>
                         <li>
                             <i class="lnr lnr-phone-handset"></i> Phone: (+800) 123 456 789)
                         </li>

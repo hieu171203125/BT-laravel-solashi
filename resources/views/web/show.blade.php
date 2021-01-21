@@ -12,8 +12,8 @@
 
                                 <ul class="ht-dropdown mega-child">
                                     <li><a href="shop.html">Office chair <i class="fa fa-angle-right"></i></a>
-                                     <!-- category submenu end-->
-                                     <ul class="ht-dropdown mega-child">
+                                       <!-- category submenu end-->
+                                       <ul class="ht-dropdown mega-child">
                                         <li><a href="shop.html">Bibendum Cursus</a></li>
                                         <li><a href="shop.html">Dignissim Turpis</a></li>
                                         <li><a href="shop.html">Dining room</a></li>
@@ -22,8 +22,8 @@
                                     <!-- category submenu end-->
                                 </li>
                                 <li><a href="shop.html">Purus Lacus <i class="fa fa-angle-right"></i></a>
-                                 <!-- category submenu end-->
-                                 <ul class="ht-dropdown mega-child">
+                                   <!-- category submenu end-->
+                                   <ul class="ht-dropdown mega-child">
                                     <li><a href="shop.html">Magna Pellentesq</a></li>
                                     <li><a href="shop.html">Molestie Tortor</a></li>
                                     <li><a href="shop.html">Vehicula Element</a></li>
@@ -248,78 +248,70 @@
 					<div class="tab-content">
                         <?php foreach ($product['images'] as $key => $value_img): ?>
                         <div id="{{$value_img->id}}" class="tab-pane fade show {{$key==0?'active':''}}">
-                           <a data-fancybox="images" href="{{asset(''.$value_img->path)}}"><img src="{{asset(''.$value_img->path)}}" alt="product-view"></a>
-                       </div>
-                       <?php endforeach ?>
+                         <a data-fancybox="images" href="{{asset(''.$value_img->path)}}"><img src="{{asset(''.$value_img->path)}}" alt="product-view"></a>
+                     </div>
+                     <?php endforeach ?>
 
-                   </div>
-                   <!-- Thumbnail Large Image End -->
-                   <!-- Thumbnail Image End -->
-                   <div class="product-thumbnail mt-15">
-                      <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
-                       <?php foreach ($product['images'] as $key => $value_img): ?>
-                       <a {{$key==0?'class="active"':''}} data-toggle="tab" href="#{{$value_img->id}}"><img src="{{asset(''.$value_img->path)}}" alt="product-thumbnail"></a>
-                       <?php endforeach ?>
-                   </div>
-               </div>
-               <!-- Thumbnail image end -->
-           </div>
-           <!-- Main Thumbnail Image End -->
-           <!-- Thumbnail Description Start -->
-           <div class="col-lg-7">
-             <div class="thubnail-desc fix">
+                 </div>
+                 <!-- Thumbnail Large Image End -->
+                 <!-- Thumbnail Image End -->
+                 <div class="product-thumbnail mt-15">
+                  <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
+                     <?php foreach ($product['images'] as $key => $value_img): ?>
+                     <a {{$key==0?'class="active"':''}} data-toggle="tab" href="#{{$value_img->id}}"><img src="{{asset(''.$value_img->path)}}" alt="product-thumbnail"></a>
+                     <?php endforeach ?>
+                 </div>
+             </div>
+             <!-- Thumbnail image end -->
+         </div>
+         <!-- Main Thumbnail Image End -->
+         <!-- Thumbnail Description Start -->
+         <div class="col-lg-7">
+           <div class="thubnail-desc fix">
               <h3 class="product-header">{{$product->name}}</h3>
-              <div class="rating-summary fix mtb-10">
-               <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
+              
+              <div class="pro-price mtb-30">
+                 <p class="d-flex align-items-center"><span class="price">{{number_format($product->price)}}</span><span class="saving-price" {{$product->on_sale==0?'hidden':''}}>Sale
+                 </span></p>
+             </div>
+             <p class="mb-20 pro-desc-details">{{$product->description}}</p>
+             <div class="product-size mb-20 clearfix">
+                 <label>Size</label>
+                 <select class="">
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                </select>
             </div>
-        </div>
-        <div class="pro-price mtb-30">
-           <p class="d-flex align-items-center"><span class="price">{{number_format($product->price)}}</span><span class="saving-price" {{$product->on_sale==0?'hidden':''}}>Sale
-           </span></p>
+            <div class="color clearfix mb-20">
+             <label>color</label>
+             <ul class="color-list">
+                <li>
+                   <a class="orange active" href="#"></a>
+               </li>
+               <li>
+                   <a class="paste" href="#"></a>
+               </li>
+           </ul>
        </div>
-       <p class="mb-20 pro-desc-details">{{$product->description}}</p>
-       <div class="product-size mb-20 clearfix">
-           <label>Size</label>
-           <select class="">
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-        </select>
-    </div>
-    <div class="color clearfix mb-20">
-       <label>color</label>
-       <ul class="color-list">
-        <li>
-         <a class="orange active" href="#"></a>
-     </li>
-     <li>
-         <a class="paste" href="#"></a>
-     </li>
- </ul>
-</div>
-<div class="box-quantity d-flex hot-product2">
-   <form action="#">
-    <input class="quantity mr-15" type="number" min="1" value="1">
-</form>
-<div class="pro-actions">
-    <div class="actions-primary">
-     <a href="cart.html" title="" data-original-title="Add to Cart"> + Add To Cart</a>
- </div>
-</div>
-</div>
-<div class="socila-sharing mt-25">
-   <ul class="d-flex">
-    <li>share</li>
-    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-    <li><a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
-    <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
-</ul>
+       <div class="box-quantity d-flex hot-product2">
+         <form action="#">
+            <input class="quantity mr-15" type="number" min="1" value="1">
+        </form>
+        <div class="pro-actions">
+            <div class="actions-primary">
+               <a href="cart.html" title="" data-original-title="Add to Cart"> + Add To Cart</a>
+           </div>
+       </div>
+   </div>
+   <div class="socila-sharing mt-25">
+     <ul class="d-flex">
+        <li>share</li>
+        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+    </ul>
 </div>
 </div>
 </div>
@@ -338,7 +330,6 @@
 			<div class="col-sm-12">
 				<ul class="main-thumb-desc nav tabs-area" role="tablist">
 					<li><a class="active" data-toggle="tab" href="#dtail">Product Details</a></li>
-					<li><a data-toggle="tab" href="#review">Reviews 1</a></li>
 				</ul>
 				<!-- Product Thumbnail Tab Content Start -->
 				<div class="tab-content thumb-content border-default">
@@ -365,41 +356,41 @@
 		<!-- Hot Deal Product Activation Start -->
 		<div class="hot-deal-active owl-carousel">
 			<?php foreach ($productcategory as $key => $value): ?>
-                        <!-- Single Product Start -->
-                        <div class="single-product">
-                            <!-- Product Image Start -->
-                            <div class="pro-img">
-                                <a href="{{Route('web.show',['product_id'=>$value->id])}}">
-                                    <img class="primary-img" src="{{asset(''.$value['images'][0]->path)}}" alt="single-product">
-                                </a>
-                                <div class="countdown" data-countdown="2020/03/01"></div>
-                                <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
-                            </div>
-                            <!-- Product Image End -->
-                            <!-- Product Content Start -->
-                            <div class="pro-content">
-                                <div class="pro-info">
-                                    <h4><a href="{{Route('web.show',['product_id'=>$value->id])}}">{{$value->name}}</a></h4>
-                                    <p><span class="price">$84.45</span><del class="prev-price">$105.50</del></p>
-                                    <div class="label-product l_sale">20<span class="symbol-percent">%</span></div>
-                                </div>
-                                <div class="pro-actions">
-                                    <div class="actions-primary" >
-                                        <a href="{{Route('web.cart.addhome',['product_id'=>$value->id])}}" title="Add to Cart"> + Thêm vào giỏ hàng</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product Content End -->
-                            <span class="sticker-sale" <?php echo $value->on_sale==0?'hidden':''; ?>>sale</span>
-
+            <!-- Single Product Start -->
+            <div class="single-product">
+                <!-- Product Image Start -->
+                <div class="pro-img">
+                    <a href="{{Route('web.show',['product_id'=>$value->id])}}">
+                        <img class="primary-img" src="{{asset(''.$value['images'][0]->path)}}" alt="single-product">
+                    </a>
+                    
+                    <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
+                </div>
+                <!-- Product Image End -->
+                <!-- Product Content Start -->
+                <div class="pro-content">
+                    <div class="pro-info">
+                        <h4><a href="{{Route('web.show',['product_id'=>$value->id])}}">{{$value->name}}</a></h4>
+                        <p><span class="price">{{number_format($value->price)}}VND</p>
+                            
                         </div>
-                        <!-- Single Product End -->
-                        <?php endforeach ?>	
-		</div>                
-		<!-- Hot Deal Product Active End -->
+                        <div class="pro-actions">
+                            <div class="actions-primary" >
+                                <a href="{{Route('web.cart.addhome',['product_id'=>$value->id])}}" title="Add to Cart"> + Thêm vào giỏ hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Content End -->
+                    <span class="sticker-sale" <?php echo $value->on_sale==0?'hidden':''; ?>>sale</span>
 
-	</div>
-	<!-- Container End -->
-</div>
-<!-- Realated Products End Here -->
-@endsection
+                </div>
+                <!-- Single Product End -->
+                <?php endforeach ?>	
+            </div>                
+            <!-- Hot Deal Product Active End -->
+
+        </div>
+        <!-- Container End -->
+    </div>
+    <!-- Realated Products End Here -->
+    @endsection
