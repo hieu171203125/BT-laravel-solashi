@@ -29,13 +29,13 @@ if(Session::has('message')){
 			<div class="col-sm-12">
 				<div class="register-title">
 					<h3 class="mb-10">REGISTER ACCOUNT</h3>
-						@if(count($errors)>0)
-						<ul>
-							@foreach($errors->all() as $key => $value)
-							<li class="alert alert-danger"><strong>{{$value}}</strong></li>
-							@endforeach
-						</ul>
-						@endif
+					@if(count($errors)>0)
+					<ul>
+						@foreach($errors->all() as $key => $value)
+						<li class="alert alert-danger"><strong>{{$value}}</strong></li>
+						@endforeach
+					</ul>
+					@endif
 					<p class="mb-10">If you already have an account with us, please login at the login page.</p>
 				</div>
 			</div>
@@ -47,33 +47,40 @@ if(Session::has('message')){
 					@csrf
 					<fieldset>
 						<legend>Your Personal Details</legend>
-						
+
 						<div class="form-group d-md-flex align-items-md-center">
-							<label class="control-label col-md-2" for="l-name"><span class="require">*</span>Name</label>
+							<label class="control-label col-md-2" for="l-name"><span
+									class="require">*</span>Name</label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="l-name" placeholder="Last Name"  name="name">
+								<input type="text" class="form-control" id="l-name" placeholder="Last Name" name="name">
 							</div>
 						</div>
 						<div class="form-group d-md-flex align-items-md-center">
-							<label class="control-label col-md-2" for="email"><span class="require">*</span>Email</label>
+							<label class="control-label col-md-2" for="email"><span
+									class="require">*</span>Email</label>
 							<div class="col-md-10">
-								<input type="email" class="form-control" id="email" placeholder="Enter you email address here..." required name="email" >
+								<input type="email" class="form-control" id="email"
+									placeholder="Enter you email address here..." required name="email">
 							</div>
 						</div>
-						
+
 					</fieldset>
 					<fieldset>
 						<legend>Your Password</legend>
 						<div class="form-group d-md-flex align-items-md-center">
-							<label class="control-label col-md-2" for="pwd"><span class="require">*</span>Password:</label>
+							<label class="control-label col-md-2" for="pwd"><span
+									class="require">*</span>Password:</label>
 							<div class="col-md-10">
-								<input type="password" class="form-control" id="pwd" placeholder="Password" required name="password">
+								<input type="password" class="form-control" id="pwd" placeholder="Password" required
+									name="password">
 							</div>
 						</div>
 						<div class="form-group d-md-flex align-items-md-center">
-							<label class="control-label col-md-2" for="pwd-confirm"><span class="require">*</span>Confirm Password</label>
+							<label class="control-label col-md-2" for="pwd-confirm"><span
+									class="require">*</span>Confirm Password</label>
 							<div class="col-md-10">
-								<input type="password" class="form-control" id="pwd-confirm" placeholder="Confirm password" required>
+								<input type="password" class="form-control" id="pwd-confirm"
+									placeholder="Confirm password" required>
 							</div>
 						</div>
 					</fieldset>
@@ -84,7 +91,7 @@ if(Session::has('message')){
 							<input type="submit" value="Đăng kí" class="return-customer-btn" id="button-check">
 						</div>
 					</div>
-					
+
 				</form>
 			</div>
 		</div>

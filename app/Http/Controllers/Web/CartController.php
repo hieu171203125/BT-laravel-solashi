@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\CartSession;
 use App\Product;
+use App\Cart;
 use Session;
+use Auth;
 session_start();
 class CartController extends Controller
 {
@@ -36,6 +38,7 @@ class CartController extends Controller
 
     }
     public function updateCart(Request $request) {
+    //Mỗi quantity sẽ có key = id sản phẩm đã gửi như trang cart.blade.php
       foreach($request->quantity as $key => $value) 
         {
         $oldcart = Session('cart')?Session::get('cart'):null;    
@@ -53,6 +56,20 @@ class CartController extends Controller
             Session::put('cart',$newcart);
             Session::put('message','Đã xóa sản phẩm khỏi giỏ hàng');
             return redirect()->route('web.cart');
+    }
+    public function checkout(){
+        $products = Session::get('cart')->list; 
+        foreach($products as $key => $value){
+            Cart::create([
+                'user_id'=> Auth::user()->id,
+                'product_id'=>$key,
+                'quantity'=>$value['quantity'],
+                'status'=>0
+            ]);
+        }
+        Session::put('cart',null); 
+        Session::put('message','Đã gửi đơn đặt hàng');
+        return redirect()->route('web.index');
     }
 }
 ?>

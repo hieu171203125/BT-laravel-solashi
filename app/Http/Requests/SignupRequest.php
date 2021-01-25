@@ -28,9 +28,10 @@ class SignupRequest extends FormRequest
             'name'  => 'required'
         ];
     }
-    public function message(){
+    public function messages()
+    {
         return [
-        'email.unique'=>'Email này đã được dùng,vui lòng chọn email khác'
+            'email.unique' => 'Email này đã được dùng,vui lòng chọn email khác',
         ];
     }
 }

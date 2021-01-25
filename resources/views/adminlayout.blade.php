@@ -10,18 +10,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset('public/admin/assets/css/style.css') }}" rel="stylesheet" type="text/css" id="app-stylesheet">
     <!-- Plugins css-->
     <link href="{{ asset('public/admin/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"
         type="text/css">
+    <link href="{{ asset('public/admin/assets/libs/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('public/admin/assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css">
     <!-- App css -->
 
     <link href="{{ asset('public/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"
         id="bootstrap-stylesheet">
     <link href="{{ asset('public/admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('public/admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-stylesheet">
-   
+    <link href="{{ asset('public/admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css"
+        id="app-stylesheet">
+
 
 </head>
 
@@ -52,19 +55,11 @@
 
                     </div>
                 </li>
-
-                <li class="dropdown notification-list">
-                    <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
-                        <i class="mdi mdi-settings-outline noti-icon"></i>
-                    </a>
-                </li>
-
-
             </ul>
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="index.html" class="logo text-center logo-dark">
+                <a href="{{route('admin.index')}}" class="logo text-center logo-dark">
                     <span class="logo-lg">
                         <img src="{{ asset('public/admin/assets/images/logo-dark.png') }}" alt="" height="18">
                         <!-- <span class="logo-lg-text-dark">Velonic</span> -->
@@ -75,7 +70,7 @@
                     </span>
                 </a>
 
-                <a href="index.html" class="logo text-center logo-light">
+                <a href="{{route('admin.index')}}" class="logo text-center logo-light">
                     <span class="logo-lg">
                         <img src="{{ asset('public/admin/assets/images/logo-light.png') }}" alt="" height="18">
                         <!-- <span class="logo-lg-text-dark">Velonic</span> -->
@@ -154,6 +149,18 @@
                                 <li><a href="components-range-sliders.html">Thêm danh mục</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                <i class="mdi mdi-cart-arrow-right"></i>
+                                <span> Quản lý đơn hàng </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="{{Route('admin.cart.index')}}">Tất cả đơn hàng </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <!-- End Sidebar -->
@@ -173,9 +180,6 @@
         <div class="content-page">
             @yield('content')
             <!-- end content -->
-
-
-
             <!-- Footer Start -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -197,61 +201,6 @@
     </div>
     <!-- END wrapper -->
 
-
-    <!-- Right Sidebar -->
-    <div class="right-bar">
-        <div class="rightbar-title">
-            <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                <i class="mdi mdi-close"></i>
-            </a>
-            <h4 class="font-17 m-0 text-white">Theme Customizer</h4>
-        </div>
-        <div class="slimscroll-menu">
-
-            <div class="p-4">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Customize </strong> the overall color scheme, layout, etc.
-                </div>
-                <div class="mb-2">
-                    <img src="{{ asset('public/admin/assets/images/layouts/light.png') }}"
-                        class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked="">
-                    <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="{{ asset('public/admin/assets/images/layouts/dark.png') }}"
-                        class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
-                        data-bsstyle="assets/css/bootstrap-dark.min.css" data-appstyle="assets/css/app-dark.min.css">
-                    <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="{{ asset('public/admin/assets/images/layouts/rtl.png') }}" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-5">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
-                        data-appstyle="assets/css/app-rtl.min.css">
-                    <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                </div>
-
-            </div>
-        </div> <!-- end slimscroll-menu-->
-    </div>
-    <!-- /Right-bar -->
-
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
-
-    <a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
-        <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos
-    </a>
 
     <!-- Vendor js -->
     <script src="{{ asset('public/admin/assets/js/vendor.min.js') }}"></script>
@@ -279,8 +228,11 @@
     <!-- App js -->
     <script src="{{ asset('public/admin/assets/js/app.min.js') }}"></script>
 
-     <!-- Plugins js -->
+    <!-- Plugins js -->
     <script src="{{ asset('public/admin/assets/libs/dropzone/dropzone.min.js') }}"></script>
+
+    <!-- alert ----->
+    <script src="{{ asset('public/admin/assets\js\pages\sweet-alerts.init.js') }} "></script>
 </body>
 
 </html>

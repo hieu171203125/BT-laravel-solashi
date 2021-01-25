@@ -19,21 +19,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')->get();
-        $productsontop = DB::table('products')->where('is_top',1)->get();
-        // $productsontop = Product::where('is_top',1)->with('images')->get();
-        // dd($productsontop);
-        // echo '<pre>';
-        // var_dump($productsontop->toArray());
+        $products = Product::with('images')->with('categoris')->get();
+        $productsontop = Product::where('is_top',1)->with('images')->get();
         $category = Category::all();
-        $image = DB::table('images')->get();
-        $images = array(); 
-        foreach ($products as $key => $value) {
-            $oneimage = DB::table('images')->where('product_id',$value->id)->first();
-            array_push($images, $oneimage);      
-        }
         Session::put('category',$category);
-        return view('web.home',compact('products','category','images','productsontop'));
+        return view('web.home',compact('products','category','productsontop'));
     }
 
     /**
@@ -112,8 +102,9 @@ class HomeController extends Controller
     }
     public function showcategory($id)
     {
-        //
-        echo 'category';
+        $category = Category::find($id);
+        $products = Product::with('categoris')->with('images')->where('category_id',$id)->get();
+        return view('web.category',compact('category','products'));
     }
     
     

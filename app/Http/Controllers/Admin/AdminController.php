@@ -7,14 +7,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Session;
-
+use App\Product;
+use App\Cart;
 session_start();
 class AdminController extends Controller
 {
     //
     public function index()
     {
-        return view('admin.home');
+        $carts = Cart::all();
+        $products = Product::all();
+        return view('admin.home',compact('carts','products'));
     }
     public function login()
     {

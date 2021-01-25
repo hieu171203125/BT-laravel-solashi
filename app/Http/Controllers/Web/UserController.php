@@ -66,7 +66,7 @@ class UserController extends Controller
             'password'=>$request->password
         ];
 
-        if(Auth::attempt($user)){
+        if(Auth::attempt($user) && Auth::user()->is_admin==0 ){
             Session::put('customer_name',Auth::user()->name);
             return redirect()->route('web.index');
         } else{ 
@@ -84,6 +84,7 @@ class UserController extends Controller
         Session::put('customer_name',null);
         return redirect()->route('web.index');
     }
+    
 
     /**
      * Display the specified resource.

@@ -5,6 +5,13 @@
     text-overflow: ellipsis;
 }
 
+p-name {
+    width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .select-top {
     width: 120px;
 }
