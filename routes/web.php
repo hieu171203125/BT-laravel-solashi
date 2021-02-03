@@ -32,11 +32,13 @@ Route::group(['prefix' => '', 'namespace' => 'Web'], function () {
 	Route::get('/logout', 'UserController@logout')->name('web.logout');
 	Route::get('/cart', 'CartController@index')->name('web.cart');
 	Route::get('/cart-home/{product_id}', 'CartController@addCarthome')->name('web.cart.addhome');
-	Route::post('/cart-details/{product_id}', 'CartController@cartdetails')->name('web.cart.adddetails');
+	Route::post('/cart-details/{product_id}', 'CartController@cartdetail')->name('web.cart.adddetail');
 	Route::post('/update-cart', 'CartController@updateCart')->name('web.cart.update');
 	Route::get('/delete-cart/{product_id}', 'CartController@deleteCart')->name('web.cart.delete');
 	Route::get('/checkout', 'CartController@checkout')->name('web.cart.checkout')->middleware('checkuser');
+	Route::post('/confirm', 'CartController@confirm')->name('web.cart.confirm')->middleware('checkuser');
 	Route::get('/search', 'HomeController@search')->name('web.search');
+	Route::get('/contact', 'HomeController@contact')->name('web.contact');
 });
 
 
@@ -47,6 +49,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 	Route::post('checklogin', 'AdminController@checklogin')->name('admin.checklogin');
 	Route::group(['middleware' => 'checkadmin'], function () {
 		Route::get('/', 'AdminController@index')->name('admin.index');
+		Route::get('/search', 'ProductController@search')->name('admin.search');
 		Route::group(['prefix' => 'product'], function () {
 			Route::get('index', 'ProductController@index')->name('admin.product.index');
 			Route::get('create', 'ProductController@create')->name('admin.product.create');
@@ -54,12 +57,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 			Route::get('edit/{product_id}', 'ProductController@edit')->name('admin.product.edit');
 			Route::post('update/{product_id}', 'ProductController@update')->name('admin.product.update');
 			Route::get('destroy/{product_id}', 'ProductController@destroy')->name('admin.product.destroy');
+			Route::get('show/{product_id}', 'ProductController@show')->name('admin.product.show');
+			Route::get('remove_img/{id}', 'ProductController@remove_img')->name('admin.product.remove_img');
 		});
 		Route::group(['prefix' => 'cart'], function () {
 			Route::get('index', 'CartController@index')->name('admin.cart.index');
 			Route::get('check/{id}', 'CartController@check')->name('admin.cart.check');
 			Route::get('destroy/{id}', 'CartController@destroy')->name('admin.cart.destroy');
 			Route::get('show/{id}', 'CartController@show')->name('admin.cart.show');
+			Route::get('showcheck/{status}','CartController@showcheck')->name('admin.cart.showcheck');
 		});
 		
 	});

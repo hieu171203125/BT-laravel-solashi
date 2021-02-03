@@ -110,10 +110,78 @@
                                             <label class="col-lg-2 col-form-label" for="example-fileinput">Chọn
                                                 ảnh sản phẩm</label>
                                             <div class="col-lg-10">
-                                                <input type="file" class="form-control" id="example-fileinput"
-                                                    name="image[]" multiple>
+                                                <input type="file" class="form-control" id="InputFile" name="image[]"
+                                                    multiple>
                                             </div>
                                         </div>
+                                        <div class="row" id="images-to-upload" hidden>
+                                            <div class="col-md-12 display-img">
+                                                <div class="card">
+                                                    <div class="card-body" id="card-preview">
+                                                        <div id="ImagePreview" style="margin: auto">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <style>
+                                            .image-preview {
+                                                display: block;
+                                                width: 600px%;
+                                                height: 450px;
+                                                object-fit: fill;
+                                                margin: 0 auto;
+                                                padding-top: 10px;
+                                            }
+                                        </style>
+                                        <script>
+                                            const InputFile = document.getElementById("InputFile");
+                                            const PreviewContainer = document.getElementById("ImagePreview");
+                                            //const PreviewImage = PreviewContainer.querySelector(".ImagePreview_img");
+                                            InputFile.addEventListener("change",function(e){
+                                                if(document.getElementById("images-to-upload").hidden==false){
+                                                    const image = document.getElementById("ImagePreview");
+                                                    image.remove();
+                                                    document.getElementById("images-to-upload").hidden = true;
+                                                    const div = '<div id="ImagePreview" style="margin: auto"></div>';
+                                                    $('#card-preview').append(div);
+    
+                                                    const files= e.target.files;
+                                                    for(const index in files){
+                                                    const file = this.files[index];
+                                                    if(file){
+                                                    const reader = new FileReader();
+                                                    reader.addEventListener("load",function(){
+                                                    document.getElementById("images-to-upload").hidden = false;
+                                                    //PreviewImage.setAttribute("src",this.result);
+                                                    const img = '<img src="'+this.result+'" id="ImagePreview_img" class="ImagePreview_img image-preview" alt="">';
+                                                    $('#ImagePreview').append(img);
+                                                    });
+                                                    reader.readAsDataURL(file);
+                                                    }
+                                                    }
+                                                } 
+                                                else 
+                                                {
+                                                const files= e.target.files;
+                                                for(const index in files){
+                                                    const file = this.files[index];
+                                                    if(file){
+                                                    const reader = new FileReader();
+                                                    reader.addEventListener("load",function(){
+                                                    document.getElementById("images-to-upload").hidden = false;
+                                                    //PreviewImage.setAttribute("src",this.result);
+                                                    const img = '<img src="'+this.result+'" id="ImagePreview_img" class="ImagePreview_img image-preview" alt="">';
+                                                    $('#ImagePreview').append(img);
+                                                    });
+                                                    reader.readAsDataURL(file);   
+                                                    }
+                                                }
+                                                }    
+                                            });
+                                        </script>
+
 
 
                                         <div class="form-group row mb-0">
@@ -122,7 +190,7 @@
                                                     class="btn btn-primary waves-effect waves-light mr-1">
                                                     Thêm vào cửa hàng
                                                 </button>
-                                                <a href="{{ route('admin.home') }}">
+                                                <a href="{{ route('admin.index') }}">
                                                     <button type="button"
                                                         class="btn btn-danger waves-effect waves-light">
                                                         Hủy

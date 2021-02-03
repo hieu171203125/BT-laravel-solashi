@@ -37,6 +37,7 @@
 
     <!-- Modernizer js -->
     <script src="{{asset('public/web/js/vendor/modernizr-3.5.0.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -162,7 +163,7 @@
                                     <?php else: ?>
                                     <li>
                                         <a href="{{Route('web.signin')}}"><i class="lnr lnr-user"></i><span
-                                                class="my-cart"><span><strong>Sign in</strong></span></a>
+                                                class="my-cart"><span><strong>Đăng nhập</strong></span></a>
                                     </li>
                                     <?php endif ?>
 
@@ -186,9 +187,9 @@
                         <div class="col-xl-9 col-lg-8 col-md-12 ">
                             <nav class="d-none d-lg-block">
                                 <ul class="header-bottom-list d-flex">
-                                    <li class="active"><a href="index.html">home</a>
+                                    <li class="active"><a href="index.html">Trang chủ</a>
                                     </li>
-                                    <li><a href="shop.html">Category<i class="fa fa-angle-down"></i></a>
+                                    <li><a href="shop.html">Danh mục<i class="fa fa-angle-down"></i></a>
                                         <!-- Home Version Dropdown Start -->
                                         <ul class="ht-dropdown dropdown-style-two">
                                             <?php foreach (Session::get('category') as $key => $value): ?>
@@ -199,8 +200,11 @@
                                         </ul>
                                         <!-- Home Version Dropdown End -->
                                     </li>
-                                    <li><a href="{{Route('web.signin')}}">Signin</a></li>
-                                    <li><a href="{{Route('web.signup')}}">Signup</a></li>
+                                    <li><a href="{{Route('web.contact')}}">Liên hệ</a></li>
+                                    @if(!Session::has('customer_name'))
+                                    <li><a href="{{Route('web.signin')}}">Đăng nhập</a></li>
+                                    <li><a href="{{Route('web.signup')}}">Đăng kí</a></li>
+                                    @endif
                                 </ul>
                             </nav>
                             <div class="mobile-menu d-block d-lg-none">
@@ -263,7 +267,7 @@
                                 <ul class="vertical-menu-list">
                                     <li><a href="shop.html"><span><img
                                                     src="{{asset('public/web/img\vertical-menu\6.png')}}"
-                                                    alt="menu-icon"></span>Fashion<i class="fa fa-angle-right"
+                                                    alt="menu-icon"></span>Thời trang<i class="fa fa-angle-right"
                                                 aria-hidden="true"></i></a>
                                         <!-- Vertical Mega-Menu Start -->
                                         <ul class="ht-dropdown megamenu megamenu-two">
@@ -392,15 +396,15 @@
                         <!-- Single Footer Start -->
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="single-footer mb-sm-40">
-                                <h3 class="footer-title">Information</h3>
+                                <h3 class="footer-title">Thông tin</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="#">Delivery Information</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="contact.html">Terms & Conditions</a></li>
+                                        <li><a href="about.html">Về chúng tôi</a></li>
+                                        <li><a href="#">Thông tin giao hàng</a></li>
+                                        <li><a href="#">Chính sách bảo mật</a></li>
+                                        <li><a href="contact.html">Điều khoản & điều kiện</a></li>
                                         <li><a href="login.html">FAQs</a></li>
-                                        <li><a href="login.html">Return Policy</a></li>
+                                        <li><a href="login.html">Chính sách hoàn trả</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -409,15 +413,14 @@
                         <!-- Single Footer Start -->
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="single-footer mb-sm-40">
-                                <h3 class="footer-title">Customer Service</h3>
+                                <h3 class="footer-title">Dịch vụ khách hàng</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Order History</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
-                                        <li><a href="#">Site Map</a></li>
-                                        <li><a href="#">Gift Certificates</a></li>
+                                        <li><a href="contact.html">Liên hệ chúng tôi</a></li>
+                                        <li><a href="#">Hoàn trả</a></li>
+                                        <li><a href="#">lịch sử đơn hàng</a></li>
+                                        <li><a href="#">Sơ đồ trang web</a></li>
+                                        <li><a href="#">Phiếu quà tặng</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -426,15 +429,15 @@
                         <!-- Single Footer Start -->
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="single-footer mb-sm-40">
-                                <h3 class="footer-title">Extras</h3>
+                                <h3 class="footer-title">Bổ sung</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
-                                        <li><a href="#">Newsletter</a></li>
-                                        <li><a href="#">Brands</a></li>
-                                        <li><a href="#">Gift Certificates</a></li>
-                                        <li><a href="#">Affiliate</a></li>
-                                        <li><a href="#">Specials</a></li>
-                                        <li><a href="#">Site Map</a></li>
+                                        <li><a href="#">Bản tin</a></li>
+                                        <li><a href="#">Thương hiệu</a></li>
+                                        <li><a href="#">Phiếu quà tặng</a></li>
+                                        <li><a href="#">Chi nhánh</a></li>
+                                        <li><a href="#">special</a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -443,15 +446,13 @@
                         <!-- Single Footer Start -->
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="single-footer mb-sm-40">
-                                <h3 class="footer-title">My Account</h3>
+                                <h3 class="footer-title">Tài khoản</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Order History</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
-                                        <li><a href="#">Newsletter</a></li>
+                                        <li><a href="contact.html">Liên hệ</a></li>
+                                        <li><a href="#">Phản hồi</a></li>
+                                        <li><a href="#">Tài khoản</a></li>
+                                        <li><a href="#">Lịch sử đặt hàng</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -547,7 +548,6 @@
     <script src="{{asset('public/web/js/plugins.js')}}"></script>
     <!-- Main activaion js -->
     <script src="{{asset('public/web/js/main.js')}}"></script>
-    <script src="{{asset('public/web/js/myjs.js')}}"></script>
 </body>
 
 </html>

@@ -9,7 +9,6 @@
     Session::put('message', null);
     } ?>
 <div class="content">
-
     <!-- Start Content-->
     <div class="container-fluid">
 
@@ -17,14 +16,14 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Basic Tables</h4>
-                    <div class="page-title-right">
-                        <ol class="breadcrumb p-0 m-0">
-                            <li class="breadcrumb-item"><a href="#">Velonic</a></li>
-                            <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                            <li class="breadcrumb-item active">Basic Tables</li>
-                        </ol>
-                    </div>
+                    <h4 class="page-title">
+                        @php
+                        if(isset($key)){
+                        echo "Kết quả tìm kiếm sản phẩm có code : " .$key;
+                        } else {
+                        echo "Tất cả sản phẩm";
+                        }
+                        @endphp</h4>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -35,12 +34,12 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title mb-4">Basic example</h4>
+
                         <div class="table-responsive">
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Tên sản phẩm</th>
                                         <th>Code</th>
                                         <th>Mô tả</th>
                                         <th>Danh mục</th>
@@ -55,56 +54,57 @@
                                     @foreach ($products as $key => $value)
                                     <tr>
                                         <td>
-                                            <p class="p-name">{{ $value->name }}</p>
-                                        </td>
-                                        <td>{{ $value->code }}</td>
-                                        <td>
-                                            <p class="p-description">
-                                                {{ $value->description }}
+                                            <p class="p-name" id="hien">
+                                                {{ $value->name }}
                                             </p>
+                                        </td>
+                                        <td>
+                                            <a href="{{Route('admin.product.show',['product_id',$value->id])}}">{{ $value->code }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#myModal{{$value->id}}"
+                                                title="Quick View">
+                                                <p class="p-description" id="hiendes" onclick="startmodal()">
+                                                    {{ $value->description }}
+                                                </p>
+                                            </a>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="modal fade" id="myModal{{$value->id}}">
+                                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    {{ $value->description }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>{{ $value['categoris']->name }}</td>
                                         <td>{{ $value->price }}</td>
-                                        {{-- <td> {{ $value->is_top == 1 ? 'Có' : 'Không' }} </td>
-                                        <td>{{ $value->on_sale == 1 ? 'Có' : 'Không' }}</td> --}}
                                         <td>
-                                            @if($value->is_top == 1)
-                                            <button type="button" class="btn btn-icon waves-effec btn-success">
+                                            <button type="button"
+                                                class="btn btn-icon waves-effec btn-{{$value->is_top==1?'success':'dark'}}">
                                                 <i class="fa fa-star"></i>
                                             </button>
-                                            @else
-                                            <button type="button" class="btn btn-icon waves-effec btn-danger">
-                                                <i class="fa fa-star"></i>
-                                            </button>
-                                            @endif
-
                                         </td>
                                         <td>
-                                            @if ($value->on_sale==1)
-                                            <button type="button" class="btn btn-icon waves-effect btn-success">
+                                            <button type="button"
+                                                class="btn btn-icon waves-effect btn-{{$value->on_sale==1?'success':'dark'}}">
                                                 <i class="mdi mdi-sale"></i>
                                             </button>
-                                            @else
-                                            <button type="button" class="btn btn-icon waves-effect btn-danger">
-                                                <i class="mdi mdi-sale"></i>
-                                            </button>
-                                            @endif
-
                                         </td>
 
                                         <td>
                                             <ul class="image-all">
-                                                @foreach ($value->images as $key =>$value_img)
-                                                {{-- <li class="li-image-product" style="list-style: none;">
-                                                    <img class="image-all-product"
-                                                        src="{{asset('/public/storage/'.$value_img->path)}}" alt="">
-
-                                                </li> --}}
                                                 <li class="li-image-product" style="list-style: none;">
                                                     <img class="image-all-product"
-                                                        src="{{asset('public/storage/'.$value_img->path)}}" alt="">
+                                                        src="{{asset('public/storage/'.$value['images'][0]->path)}}"
+                                                        alt="">
                                                 </li>
-                                                @endforeach
                                             </ul>
                                         </td>
                                         <td style="white-space: nowrap; width: 1%;">
@@ -121,6 +121,13 @@
                                                     <button type="button"
                                                         class="btn btn-danger editable-cancel btn-sm waves-effect">
                                                         <i class="mdi mdi-close"></i>
+                                                    </button>
+                                                </a>
+                                                <a
+                                                    href="{{ route('admin.product.show', ['product_id' => $value->id]) }}">
+                                                    <button type="button"
+                                                        class="btn btn-success editable-cancel btn-sm waves-effect">
+                                                        <i class="ion ion-md-eye"></i>
                                                     </button>
                                                 </a>
                                             </div>
@@ -142,10 +149,19 @@
     <!-- end container-fluid -->
 
 </div>
-<style>
-    .image-all-product {
-        height: 150px;
-        width: 150px;
-    }
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('[id="hien"]').mouseenter(function(){
+        $('[id="hien"]').css("overflow","visible");
+        $('[id="hien"]').css("text-overflow","no");
+        $('[id="hien"]').css("width","100%");
+        });
+        $('[id="hien"]').mouseleave(function(){
+        $('[id="hien"]').css("overflow","hidden");
+        $('[id="hien"]').css("text-overflow","ellipsis");
+        $('[id="hien"]').css("width","100px");
+        });
+    });
+</script>
 @endsection

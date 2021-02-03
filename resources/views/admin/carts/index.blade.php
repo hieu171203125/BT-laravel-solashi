@@ -16,7 +16,19 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Danh sách đơn hàng</h4>
+                    <h4 class="page-title">Danh sách đơn hàng
+                        @php
+                        if(isset($status)){
+                        if($status==1){
+                        echo 'Đã nhận';
+                        } else {
+                        echo 'Chưa nhận';
+                        }
+                        } else {
+                        echo '';
+                        }
+                        @endphp
+                    </h4>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -27,7 +39,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title mb-4">Đơn hàng</h4>
+
                         <div class="table-responsive">
                             <table class="table mb-0">
                                 <thead>

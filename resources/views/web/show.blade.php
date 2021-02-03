@@ -6,8 +6,8 @@
     <div class="container">
         <div class="breadcrumb">
             <ul class="d-flex align-items-center">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="{{Route('web.index')}}">Home</a></li>
+                <li><a href="{{Route('web.index')}}">Shop</a></li>
                 <li class="active"><a href="product.html">Products</a></li>
             </ul>
         </div>
@@ -27,7 +27,8 @@
                         <?php foreach ($product['images'] as $key => $value_img): ?>
                         <div id="{{$value_img->id}}" class="tab-pane fade show {{$key==0?'active':''}}">
                             <a data-fancybox="images" href="{{asset('public/storage/'.$value_img->path)}}"><img
-                                    src="{{asset('public/storage/'.$value_img->path)}}" alt="product-view"></a>
+                                    id="img-detail-normal" src="{{asset('public/storage/'.$value_img->path)}}"
+                                    alt="product-view"></a>
                         </div>
                         <?php endforeach ?>
 
@@ -38,9 +39,12 @@
                         <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
                             <?php foreach ($product['images'] as $key => $value_img): ?>
                             <a {{$key==0?'class="active"':''}} data-toggle="tab" href="#{{$value_img->id}}"><img
-                                    src="{{asset('public/storage/'.$value_img->path)}}" alt="product-thumbnail"></a>
+                                    id="img-detail-small" src="{{asset('public/storage/'.$value_img->path)}}"
+                                    alt="product-thumbnail"></a>
                             <?php endforeach ?>
+
                         </div>
+
                     </div>
                     <!-- Thumbnail image end -->
                 </div>
@@ -48,52 +52,47 @@
                 <!-- Thumbnail Description Start -->
                 <div class="col-lg-7">
                     <div class="thubnail-desc fix">
-                        <h3 class="product-header">{{$product->name}}</h3>
+                        <h3 class="product-header"><strong>{{$product->name}}</strong></h3>
+                        <h4 class="product-header">Code : {{$product->code}}</h4>
+                        @if ($product->quantity>0)
+                        <div class="pro-ref mt-20">
+                            <p><span class="in-stock"><i class="ion-checkmark-round"></i> Còn hàng</span></p>
+                        </div>
+                        @else
+                        <div class="pro-ref mt-20">
+                            <p><span style="text-decoration: line-through;"><i class="ion-checkmark-round"></i> Hết
+                                    hàng</span></p>
+                        </div>
+                        @endif
 
                         <div class="pro-price mtb-30">
-                            <p class="d-flex align-items-center"><span
-                                    class="price">{{number_format($product->price)}}</span><span class="saving-price"
-                                    {{$product->on_sale==0?'hidden':''}}>Sale
+                            <p class="d-flex align-items-center"><span class="price">{{number_format($product->price) }}
+                                    VND</span><span class="saving-price" {{$product->on_sale==0?'hidden':''}}>Sale
                                 </span></p>
                         </div>
-                        <p class="mb-20 pro-desc-details">{{$product->description}}</p>
-                        <div class="product-size mb-20 clearfix">
-                            <label>Size</label>
-                            <select class="">
-                                <option>S</option>
-                                <option>M</option>
-                                <option>L</option>
-                            </select>
-                        </div>
-                        <div class="color clearfix mb-20">
-                            <label>color</label>
-                            <ul class="color-list">
-                                <li>
-                                    <a class="orange active" href="#"></a>
-                                </li>
-                                <li>
-                                    <a class="paste" href="#"></a>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="box-quantity d-flex hot-product2">
-                            <form action="#">
-                                <input class="quantity mr-15" type="number" min="1" value="1">
+                            <form id="myForm" action="{{Route('web.cart.adddetail',['product_id'=>$product->id])}}"
+                                method="POST">
+                                @csrf
+                                <input class="quantity mr-15" id="quantity" type="number" min="1" value="1"
+                                    name="quantity">
+                                <button type="submit" class="btn-add-cart">+ Add To Cart</button>
                             </form>
-                            <div class="pro-actions">
-                                <div class="actions-primary">
-                                    <a href="cart.html" title="" data-original-title="Add to Cart"> + Add To Cart</a>
-                                </div>
-                            </div>
                         </div>
                         <div class="socila-sharing mt-25">
                             <ul class="d-flex">
                                 <li>share</li>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a>
+                                </li>
                                 <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
                             </ul>
+                        </div>
+                        <div class="pro-price mtb-30">
+                            <h4> Mô tả </h4>
+                            <p class="mb-20 pro-desc-details">{{$product->description}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -105,34 +104,12 @@
     <!-- Container End -->
 </div>
 <!-- Product Thumbnail End -->
-<!-- Product Thumbnail Description Start -->
-<div class="thumnail-desc pb-100 pb-sm-60">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <ul class="main-thumb-desc nav tabs-area" role="tablist">
-                    <li><a class="active" data-toggle="tab" href="#dtail">Product Details</a></li>
-                </ul>
-                <!-- Product Thumbnail Tab Content Start -->
-                <div class="tab-content thumb-content border-default">
-                    <div id="dtail" class="tab-pane fade show active">
-                        <p>{{$product->description}}</p>
-                    </div>
-                </div>
-                <!-- Product Thumbnail Tab Content End -->
-            </div>
-        </div>
-        <!-- Row End -->
-    </div>
-    <!-- Container End -->
-</div>
-<!-- Product Thumbnail Description End -->
 <!-- Realted Products Start Here -->
 <div class="hot-deal-products off-white-bg pt-100 pb-90 pt-sm-60 pb-sm-50">
     <div class="container">
         <!-- Product Title Start -->
         <div class="post-title pb-30">
-            <h2>Realted Products</h2>
+            <h2>Sản phẩm liên quan</h2>
         </div>
         <!-- Product Title End -->
         <!-- Hot Deal Product Activation Start -->

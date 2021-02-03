@@ -15,7 +15,7 @@ if(Session::has('message')){
 		<div class="breadcrumb">
 			<ul class="d-flex align-items-center">
 				<li><a href="index.html">Home</a></li>
-				<li class="active"><a href="register.html">Register</a></li>
+				<li class="active"><a href="register.html">Đăng kí</a></li>
 			</ul>
 		</div>
 	</div>
@@ -28,7 +28,8 @@ if(Session::has('message')){
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="register-title">
-					<h3 class="mb-10">REGISTER ACCOUNT</h3>
+					<h3 class="mb-10">Đăng kí tài khoả<noframes></noframes>
+					</h3>
 					@if(count($errors)>0)
 					<ul>
 						@foreach($errors->all() as $key => $value)
@@ -52,7 +53,7 @@ if(Session::has('message')){
 							<label class="control-label col-md-2" for="l-name"><span
 									class="require">*</span>Name</label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="l-name" placeholder="Last Name" name="name">
+								<input type="text" class="form-control" id="l-name" placeholder="Họ và tên" name="name">
 							</div>
 						</div>
 						<div class="form-group d-md-flex align-items-md-center">
@@ -61,6 +62,22 @@ if(Session::has('message')){
 							<div class="col-md-10">
 								<input type="email" class="form-control" id="email"
 									placeholder="Enter you email address here..." required name="email">
+							</div>
+						</div>
+						<div class="form-group d-md-flex align-items-md-center">
+							<label class="control-label col-md-2" for="l-name"><span
+									class="require">*</span>Phone</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="l-name" placeholder="Số điện thoại"
+									name="phone">
+							</div>
+						</div>
+						<div class="form-group d-md-flex align-items-md-center">
+							<label class="control-label col-md-2" for="l-name"><span class="require">*</span>Địa
+								chỉ</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="l-name" placeholder="Địa chỉ"
+									name="address">
 							</div>
 						</div>
 

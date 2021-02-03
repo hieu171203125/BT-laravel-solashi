@@ -48,11 +48,9 @@
             </div>
 
             <div class="col-lg-12">
-
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mb-4">Thông tin khách hàng</h4>
-
                         <div class="table-responsive">
                             <table class="table table-dark mb-0">
                                 <thead>
@@ -60,6 +58,7 @@
                                         <th>Mã khách</th>
                                         <th>Tên khách </th>
                                         <th>Email</th>
+                                        <th>Số điện thoại</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,14 +66,35 @@
                                         <td>{{$cart['users']->id}}</td>
                                         <td>{{$cart['users']->name}}</td>
                                         <td>{{$cart['users']->email}}</td>
+                                        <td>{{$cart['users']->phone}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-4">Thông tin đơn hàng</h4>
+                        <div class="table-responsive">
+                            <table class="table table-dark mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Địa chỉ nhận hàng</th>
+                                        <th>Ghi chú </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
 
+                                        <td>{{$cart->address}}</td>
+                                        <td>{{$cart->notes}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-12">
 

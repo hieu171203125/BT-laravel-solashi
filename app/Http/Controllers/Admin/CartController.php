@@ -16,8 +16,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
-        $carts = Cart::all();
+        $carts = Cart::orderby('id','desc')->get();
         return view('admin.carts.index',compact('carts'));
     }
     public function check($id){
@@ -33,7 +32,6 @@ class CartController extends Controller
             Session::put('message','Cập nhật đơn hàng thành công');
             return redirect()->route('admin.cart.index');
         }
-
     }
     public function destroy($id)
     {
@@ -51,36 +49,11 @@ class CartController extends Controller
     {
         $cart = Cart::with('users')->with('products')->find($id);
         return view('admin.carts.show',compact('cart'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    }   
+    public function showcheck($status)
     {
-        //
+        $carts = Cart::where('status',$status)->get();
+        $status = $carts[0]->status;
+        return view('admin.carts.index',compact('carts','status'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
 }

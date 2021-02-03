@@ -5,8 +5,8 @@
     text-overflow: ellipsis;
 }
 
-p-name {
-    width: 50px;
+.p-name {
+    width: 100px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -19,4 +19,29 @@ p-name {
 .li-image-product {
     float: left;
     list-style: none;
+}
+
+#div_top_hypers {
+    background-color: #eeeeee;
+    display: inline;
+}
+
+#ul_top_hypers li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#img-show {
+    height: 600px;
+    width: 550px;
+    object-fit: cover;
+}
+
+.image-all-product {
+    height: 150px;
+    width: 150px;
 }

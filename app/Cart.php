@@ -9,7 +9,7 @@ class Cart extends Model
     //
     public $timestamps = false;  
 	protected $fillable = [
-		'user_id','product_id','quantity','status'
+		'user_id','product_id','quantity','status','address','notes'
 	];
 	protected $primaryKey = 'id';
 	protected $table = 'carts';

@@ -13,12 +13,14 @@ if(Session::has('message')){
     <div class="container">
         <!-- Product Title Start -->
         <div class="post-title pb-30">
-            <h2>Sản phẩm</h2>
+            <h2>Sản phẩm mới nhất
+            </h2>
         </div>
+
         <!-- Product Title End -->
         <!-- Hot Deal Product Activation Start -->
         <div class="hot-deal-active owl-carousel">
-            <?php foreach ($products as $key => $value): ?>
+            <?php foreach ($productnew as $key => $value): ?>
             <!-- Single Product Start -->
             <div class="single-product">
                 <!-- Product Image Start -->
@@ -34,7 +36,8 @@ if(Session::has('message')){
                 <div class="pro-content">
                     <div class="pro-info">
                         <h4><a href="{{Route('web.show',['product_id'=>$value->id])}}">{{$value->name}}</a></h4>
-                        <p><span class="price">{{number_format($value->price)}} VND</span></p>
+                        <p style="text-align: center"><span class="price">{{number_format($value->price)}} VND</span>
+                        </p>
                     </div>
                     <div class="pro-actions">
                         <div class="actions-primary">
@@ -44,7 +47,7 @@ if(Session::has('message')){
                     </div>
                 </div>
                 <!-- Product Content End -->
-                <span class="sticker-sale" <?php echo $value->on_sale==0?'hidden':''; ?>>sale</span>
+                <span class="sticker-sale" {{$value->on_sale==0?'hidden':''}}>sale</span>
 
             </div>
             <!-- Single Product End -->
@@ -58,12 +61,12 @@ if(Session::has('message')){
 <!-- Hot Deal Products End Here -->
 
 <!-- Arrivals Products Area Start Here -->
-<div class="second-arrivals-product pb-45 pb-sm-5">
+<div class="hot-deal-products off-white-bg pb-90 pb-sm-50">
     <div class="container">
         <div class="main-product-tab-area">
             <div class="tab-menu mb-20">
                 <div class="section-ttitle">
-                    <h2>Bán chạy nhất</h3>
+                    <h2>Bán chạy nhất</h2>
                 </div>
                 <!-- Nav tabs -->
                 <ul class="nav tabs-area" role="tablist">
@@ -74,8 +77,9 @@ if(Session::has('message')){
                     </li>
                     <?php endforeach ?>
                 </ul>
-
+                <!-- Nav tabs End-->
             </div>
+
             <!-- Tab Contetn Start -->
             <div class="tab-content">
                 <?php 
@@ -106,7 +110,7 @@ if(Session::has('message')){
                             <div class="pro-content">
                                 <div class="pro-info">
                                     <h4><a href="product.html">{{$value->name}}</a></h4>
-                                    <p><span class="price">{{$value->price}} VND</span></p>
+                                    <p><span class="price">{{number_format($value->price)}} VND</span></p>
                                 </div>
                                 <div class="pro-actions">
                                     <div class="actions-primary">
@@ -167,7 +171,8 @@ if(Session::has('message')){
                     </div>
                     <div class="pro-actions">
                         <div class="actions-primary">
-                            <a href="{{Route('web.cart.addhome',['product_id'=>$value->id])}}" title="Add to Cart"> +
+                            <a href="{{Route('web.cart.addhome',['product_id'=>$value->id])}}" title="Add to Cart">
+                                +
                                 Thêm vào giỏ hàng</a>
                         </div>
 

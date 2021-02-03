@@ -43,16 +43,18 @@ class UserController extends Controller
      */
     public function store(User $user,SignupRequest $request)
     {   
-        
             try {
                 $user = User::create([
                     'name'=>$request->input('name'),
                     'email'=>$request->input('email'),
                     'is_admin'=>0,
                     'password'=>bcrypt($request->input('password')),
+                    'phone'=>$request->input('phone'),
+                    'address'=>$request->input('address'),
                     'created_at'=>now()
                 ]);
-                return redirect()->route('web.login');
+                Session::put('message','Đăng kí tài khoản thành công');
+                return redirect()->route('web.signin');
             } catch (Exception $e) {
                 Session::put('message','Lỗi hệ thống');
                 return redirect()->back();

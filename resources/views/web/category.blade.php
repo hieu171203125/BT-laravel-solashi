@@ -3,7 +3,7 @@
 <div class="like-product ptb-95 ptb-sm-55 off-white-bg">
     <div class="container">
         <div class="like-product-area">
-            <h2 class="section-ttitle2 mb-30"> Sản phẩm theo danh mục {{$category->name}}</h2>
+            <h2 class="section-ttitle2 mb-30"> Sản phẩm theo danh mục {{$products[0]['categoris']->name}}</h2>
             <!-- Like Product Activation Start Here -->
             <div class="like-pro-active owl-carousel">
                 <?php foreach ($products as $key => $value): ?>

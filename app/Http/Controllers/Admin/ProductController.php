@@ -10,56 +10,33 @@ use App\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use File;
+use App\Cart;
 use Session;
 session_start();
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Repositories\Admin\AdminProductInterface;
+use App\Repositories\Admin\AdminProductRepository;
+
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $products = Product::with('images')->with('categoris')->get();
-        return view('admin.products.index', compact('products'));
+    private $AdminProductRepository;
+    public function __construct(AdminProductInterface $AdminProductInterface){
+        $this->AdminProductRepository = $AdminProductInterface;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        $products = $this->AdminProductRepository->All();
+        return view('admin.products.index', compact('products'));
+    }
     public function create()
     {   
         $category = Category::all();
         return view('admin.products.create',compact('category'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProductRequest $request)
-    {
-        
-        $this->validate(
-            $request,
-            [
-                'name' => 'required',
-                'code' => 'required',
-                'description' => 'required',
-                'category_id' => 'required',
-                'price' => 'required',
-                'is_top' => 'required',
-                'on_sale' => 'required',
-                'image' => 'required'
-            ]
-        );
+    {    
         try{
         $product = Product::create($request->all());
         if ($request->hasFile('image')) {
@@ -73,7 +50,6 @@ class ProductController extends Controller
                     ]
                 );
             }
-
         }
          Session::put('message','Thêm sản phẩm thành công');
         return redirect()->route('admin.product.index');
@@ -82,16 +58,10 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index');
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $product = $this->AdminProductRepository->Find($id);
+        Return view('admin.products.show',compact('product'));
     }
 
     /**
@@ -102,7 +72,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id',$id)->with('categoris')->with('images')->first();
+        $product = $this->AdminProductRepository->Find($id);
         $category = Category::all();
         return view('admin.products.edit',compact('product','category'));
     }
@@ -117,15 +87,11 @@ class ProductController extends Controller
     public function update($id,UpdateProductRequest $request)
     {
         
-        $product = Product::where('id',$id)->with('images')->first();
+        $product = $this->AdminProductRepository->Find($id);
         $product->fill($request->all());
         $product->save();
         $image = $product->images;
         if($request->hasFile('image')){  
-            foreach($image as $key => $value) {  
-                unlink(public_path('storage/'.$value->path));
-                Images::where('product_id',$id)->delete();
-            }
             $data = $request->image;
             foreach ($data as $key => $value) {
                 $path = $value->store('products','public');
@@ -153,18 +119,43 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-        $product = Product::where('id',$id)->with('images')->first();
+        $product = $this->AdminProductRepository->Find($id);
         $image = $product->images;
         foreach($image as $key => $value) {  
                 unlink(public_path('storage/'.$value->path));
                 Images::where('product_id',$id)->delete();
             }
-        Product::find($id)->delete();
+        $this->AdminProductRepository->Destroy($id);
         Session::put('message','Xóa sản phẩm thành công');
         return redirect()->route('admin.product.index');
         } catch (\Throwable $th) {
             Session::put('message','Xóa sản phẩm không thành công');
             return redirect()->route('admin.product.index');
+        }
+    }
+    public function remove_img($id)
+    {
+        try {
+        $img = Images::Find($id);
+        unlink(public_path('storage/'.$img->path));
+        Images::where('id',$id)->delete();
+        Session::put('message','Đã xóa ảnh thành công');
+        Return redirect()->back();
+        } catch (\Throwable $th) {
+            Session::put('message','Đã xóa ảnh không thành công');
+        Return redirect()->back();
+        }
+    }
+    public function search(Request $request)        
+    {
+        if($request->select==1){
+        $key = $request->key;
+        $products= $this->AdminProductRepository->Search($key);
+        return view('admin.products.index',compact('products','key'));
+        } else {
+            $key = $request->key;
+        $carts = Cart::where('id','like','%'.$key.'%')->with('users')->with('products')->get();
+        return view('admin.carts.index',compact('carts','key'));
         }
     }
 }

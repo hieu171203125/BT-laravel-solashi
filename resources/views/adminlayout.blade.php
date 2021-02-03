@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Dashboard 1 | Velonic - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>Trang quản trị Velonic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description">
     <meta content="Coderthemes" name="author">
@@ -24,7 +24,6 @@
     <link href="{{ asset('public/admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('public/admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css"
         id="app-stylesheet">
-
 
 </head>
 
@@ -93,10 +92,15 @@
                 </li>
 
                 <li class="d-none d-lg-block">
-                    <form class="app-search">
+                    <form action="{{Route('admin.search')}}" class="app-search" method="GET">
                         <div class="app-search-box">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <Select name="select">
+                                    <option value="1">Sản phẩm</option>
+                                    <option value="2">Đơn hàng</option>
+                                </Select>
+                                <input type="text" class="form-control" placeholder="Search..." name="key"
+                                    style="width: 250px;" required>
                                 <div class="input-group-append">
                                     <button class="btn" type="submit">
                                         <i class="fas fa-search"></i>
@@ -117,13 +121,11 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <ul class="metismenu" id="side-menu">
-
-                        <li class="menu-title">Navigation</li>
-
+                        <li class="menu-title">Mục lục</li>
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
+                            <a href="{{Route('admin.index')}}" class="waves-effect">
                                 <i class="ion-md-speedometer"></i>
-                                <span> Dashboard </span>
+                                <span> Về trang chính </span>
                             </a>
                         </li>
                         <li>
@@ -176,7 +178,6 @@
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
-
         <div class="content-page">
             @yield('content')
             <!-- end content -->
@@ -185,7 +186,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            2015 - 2020 &copy; Velonic theme by <a href="">Coderthemes</a>
+                            Velonic theme<a href="">Coderthemes</a>
                         </div>
                     </div>
                 </div>
@@ -208,7 +209,7 @@
     <script src="{{ asset('public/admin/assets/libs/moment/moment.min.js') }}"></script>
     <script src="{{ asset('public/admin/assets/libs/jquery-scrollto/jquery.scrollTo.min.js') }}"></script>
     <script src="{{ asset('public/admin/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
     <!-- Chat app -->
     <script src="{{ asset('public/admin/assets/js/pages/jquery.chat.js') }}"></script>
 
